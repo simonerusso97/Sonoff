@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         mqttHelper.setCallback(new MqttCallbackExtended() {
             @Override
             public void connectComplete(boolean b, String s) {
+                //mqttHelper.publish("prova");
             }
 
             @Override
@@ -47,10 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
+                Log.w("messageArrived", "stato cambiato " + mqttMessage);
             }
 
             @Override
             public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
+                Log.w("MQTT messageArrived", "stato cambiato " + iMqttDeliveryToken);
 
             }
         });
