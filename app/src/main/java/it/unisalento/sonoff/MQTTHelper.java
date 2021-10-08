@@ -17,14 +17,14 @@ public class MQTTHelper {
     public MqttAndroidClient mqttAndroidClient;
 
     //final String serverUri = "tcp://broker.hivemq.com:1883";
-    final String serverUri = "tcp://test.mosquitto.org:1883";
+    final String serverUri = "tcp://localhost:1883";
 
     final String clientId = "ExampleAndroidClient";
     //final String subscriptionTopic = "test/topic";
-    final String subscriptionTopic = "stat/tasmota_8231A8/RESULT";
+    final String subscriptionTopic = "stat/tasmota_8231A8/POWER1";
 
-    final String username = "xxxxxxx";
-    final String password = "yyyyyyyyyy";
+    final String username = "";
+    final String password = "";
 
     public MQTTHelper(Context context){
         Log.w("MQTTHELPER", "Starting connection" );
@@ -60,8 +60,8 @@ public class MQTTHelper {
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setAutomaticReconnect(true);
         mqttConnectOptions.setCleanSession(false);
-        mqttConnectOptions.setUserName(username);
-        mqttConnectOptions.setPassword(password.toCharArray());
+        //mqttConnectOptions.setUserName(username);
+        //mqttConnectOptions.setPassword(password.toCharArray());
 
         try {
 
@@ -112,7 +112,7 @@ public class MQTTHelper {
         }
     }
 
-    public void send(String message){
+    public void publish(String message){
         MqttMessage mqttMessage = new MqttMessage(message.getBytes());
         try {
             mqttAndroidClient.publish(subscriptionTopic, mqttMessage, null, new IMqttActionListener() {
