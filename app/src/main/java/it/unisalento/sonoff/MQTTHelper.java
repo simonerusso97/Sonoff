@@ -17,7 +17,7 @@ public class MQTTHelper {
     public MqttAndroidClient mqttAndroidClient;
 
     //final String serverUri = "tcp://broker.hivemq.com:1883";
-    final String serverUri = "tcp://10.42.0.1:1883";
+    final String serverUri = "tcp://test.mosquitto.org:1883";
 
     final String clientId = "ExampleAndroidClient";
     //final String subscriptionTopic = "test/topic";
@@ -27,7 +27,7 @@ public class MQTTHelper {
     final String password = "yyyyyyyyyy";
 
     public MQTTHelper(Context context){
-        Log.d("Starting" )
+        Log.w("MQTTHELPER", "Starting connection" );
         mqttAndroidClient = new MqttAndroidClient(context, serverUri, clientId);
         mqttAndroidClient.setCallback(new MqttCallbackExtended() {
             @Override
@@ -69,7 +69,7 @@ public class MQTTHelper {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
 
-                    Log.w("mqtt connect", "connect() succesfull");
+                    Log.w("MQTT CONNECT", "connect() succesfull");
                     DisconnectedBufferOptions disconnectedBufferOptions = new DisconnectedBufferOptions();
                     disconnectedBufferOptions.setBufferEnabled(true);
                     disconnectedBufferOptions.setBufferSize(100);
@@ -82,7 +82,7 @@ public class MQTTHelper {
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Log.w("Mqt connect", "Failed to connect to: " + serverUri + exception.toString());
+                    Log.w("MQTT CONNECT", "Failed to connect to: " + serverUri + exception.toString());
                 }
             });
 
@@ -97,12 +97,12 @@ public class MQTTHelper {
             mqttAndroidClient.subscribe(subscriptionTopic, 2, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    Log.w("Mqtt Subscribction","Subscribed!");
+                    Log.w("MQTT SUBSCRIBE","Subscribed!");
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Log.w("Mqtt Subscribction", "Subscribed fail!");
+                    Log.w("MQTT SUBSCRIBE", "Subscribed fail!");
                 }
             });
 
@@ -118,12 +118,12 @@ public class MQTTHelper {
             mqttAndroidClient.publish(subscriptionTopic, mqttMessage, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
-                    Log.w("mqtt publish", "Meesage sent correctly, token" + asyncActionToken);
+                    Log.w("MQTT PUBLISH", "Meesage sent correctly, token" + asyncActionToken);
                 }
 
                 @Override
                 public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
-                    Log.w("mqtt publish", "Failed to sent meesage, token:" + asyncActionToken);
+                    Log.w("MQTT PUBLISH", "Failed to sent meesage, token:" + asyncActionToken);
 
                 }
             });
