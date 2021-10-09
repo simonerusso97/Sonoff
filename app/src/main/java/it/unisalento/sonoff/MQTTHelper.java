@@ -16,18 +16,16 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 public class MQTTHelper {
     public MqttAndroidClient mqttAndroidClient;
 
-    //final String serverUri = "tcp://broker.hivemq.com:1883";
-    final String serverUri = "tcp://localhost:1883";
+    final String serverUri = "tcp://192.168.1.100:1883";
 
     final String clientId = "ExampleAndroidClient";
     //final String subscriptionTopic = "test/topic";
-    final String subscriptionTopic = "stat/tasmota_8231A8/POWER1";
+    String subscriptionTopic;
 
-    final String username = "";
-    final String password = "";
 
-    public MQTTHelper(Context context){
+    public MQTTHelper(Context context, String subscriptionTopic){
         Log.w("MQTTHELPER", "Starting connection" );
+        this.subscriptionTopic = subscriptionTopic;
         mqttAndroidClient = new MqttAndroidClient(context, serverUri, clientId);
         mqttAndroidClient.setCallback(new MqttCallbackExtended() {
             @Override

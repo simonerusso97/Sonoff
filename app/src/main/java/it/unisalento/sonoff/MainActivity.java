@@ -29,12 +29,14 @@ public class MainActivity extends AppCompatActivity {
         statusTextView = (TextView) findViewById(R.id.statusTextView);
 
         Listener listener = new Listener(mqttHelper);
+
+        lockSwitch.addOnAttachStateChangeListener(listener);
         startMqtt();
 
     }
 
     private void startMqtt(){
-        mqttHelper = new MQTTHelper(getApplicationContext());
+        mqttHelper = new MQTTHelper(getApplicationContext(),  "stat/tasmota_8231A8/POWER1");
         mqttHelper.setCallback(new MqttCallbackExtended() {
             @Override
             public void connectComplete(boolean b, String s) {
