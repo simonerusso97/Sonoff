@@ -20,12 +20,11 @@ public class MQTTHelper {
 
     final String clientId = "ExampleAndroidClient";
     //final String subscriptionTopic = "test/topic";
-    String subscriptionTopic;
+    //String subscriptionTopic;
 
 
     public MQTTHelper(Context context, String subscriptionTopic){
         Log.w("MQTTHELPER", "Starting connection" );
-        this.subscriptionTopic = subscriptionTopic;
         mqttAndroidClient = new MqttAndroidClient(context, serverUri, clientId);
         mqttAndroidClient.setCallback(new MqttCallbackExtended() {
             @Override
@@ -47,14 +46,14 @@ public class MQTTHelper {
 
             }
         });
-        connect();
+        connect(subscriptionTopic);
     }
 
     public void setCallback(MqttCallbackExtended callback) {
         mqttAndroidClient.setCallback(callback);
     }
 
-    private void connect(){
+    private void connect(String subscriptionTopic){
         MqttConnectOptions mqttConnectOptions = new MqttConnectOptions();
         mqttConnectOptions.setAutomaticReconnect(true);
         mqttConnectOptions.setCleanSession(false);
@@ -75,7 +74,7 @@ public class MQTTHelper {
                     disconnectedBufferOptions.setDeleteOldestMessages(false);
                     mqttAndroidClient.setBufferOpts(disconnectedBufferOptions);
 
-                    subscribeToTopic();
+                    subscribeToTopic(subscriptionTopic);
                 }
 
                 @Override
@@ -90,12 +89,14 @@ public class MQTTHelper {
         }
     }
 
-    private void subscribeToTopic() {
+    private void subscribeToTopic(String subscriptionTopic) {
         try {
             mqttAndroidClient.subscribe(subscriptionTopic, 2, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                     Log.w("MQTT SUBSCRIBE","Subscribed!");
+                    Log.w("MQTT SUBSCRIBE","Chiedo aggiornamento!");
+                    publish("cmnd/tasmota_8231A8/Power1", "");
                 }
 
                 @Override
@@ -110,7 +111,7 @@ public class MQTTHelper {
         }
     }
 
-    public void publish(String message){
+    public void publish(String subscriptionTopic, String message){
         MqttMessage mqttMessage = new MqttMessage(message.getBytes());
         try {
             mqttAndroidClient.publish(subscriptionTopic, mqttMessage, null, new IMqttActionListener() {
@@ -128,6 +129,6 @@ public class MQTTHelper {
         } catch (MqttException e) {
             e.printStackTrace();
         }
-
     }
+
 }

@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     Switch lockSwitch;
     TextView statusTextView;
 
+    boolean creatingView=true;
+
     MQTTHelper mqttHelper;
 
     @Override
@@ -28,10 +30,12 @@ public class MainActivity extends AppCompatActivity {
         lockSwitch = (Switch) findViewById(R.id.lockSwitch);
         statusTextView = (TextView) findViewById(R.id.statusTextView);
 
+
+        startMqtt();
+
         Listener listener = new Listener(mqttHelper);
 
-        lockSwitch.addOnAttachStateChangeListener(listener);
-        startMqtt();
+        lockSwitch.setOnCheckedChangeListener(listener);
 
     }
 
@@ -40,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         mqttHelper.setCallback(new MqttCallbackExtended() {
             @Override
             public void connectComplete(boolean b, String s) {
-                //mqttHelper.publish("prova");
             }
 
             @Override
@@ -50,12 +53,17 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void messageArrived(String topic, MqttMessage mqttMessage) throws Exception {
-                Log.w("messageArrived", "stato cambiato " + mqttMessage);
+                Log.w("messageArrived", "stato: " + mqttMessage);
+                    if(mqttMessage.toString().equals("ON"))
+                        lockSwitch.setChecked(true);
+                    else
+                        lockSwitch.setChecked(false);
+
             }
 
             @Override
             public void deliveryComplete(IMqttDeliveryToken iMqttDeliveryToken) {
-                Log.w("MQTT messageArrived", "stato cambiato " + iMqttDeliveryToken);
+                Log.w("messageDelivered", "stato cambiato " + iMqttDeliveryToken);
 
             }
         });
