@@ -17,9 +17,6 @@ public class MainActivity extends AppCompatActivity {
     Switch lockSwitch;
     TextView statusTextView;
 
-    boolean creatingView=true;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -13,11 +13,12 @@ public class Listener implements CompoundButton.OnCheckedChangeListener {
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+        RestAPI restAPI = new RestAPI();
         if(isChecked && compoundButton.isPressed()){
-
+            restAPI.changeStatus("ON");
         }
         else if( !isChecked && compoundButton.isPressed()){
-
+            restAPI.changeStatus("OFF");
         }
 
     }
