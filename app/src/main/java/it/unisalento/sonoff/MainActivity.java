@@ -8,10 +8,6 @@ import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
-import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
-
 public class MainActivity extends AppCompatActivity {
 
     Switch lockSwitch;
