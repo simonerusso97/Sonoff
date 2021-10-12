@@ -3,8 +3,6 @@ package it.unisalento.sonoff;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -18,10 +16,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        lockSwitch = (Switch) findViewById(R.id.lockSwitch);
-        statusTextView = (TextView) findViewById(R.id.statusTextView);
+        lockSwitch = findViewById(R.id.lockSwitch);
+        statusTextView = findViewById(R.id.statusTextView);
 
-        Listener listener = new Listener();
+        RestService restService = new RestService(getApplicationContext());
+        restService.getStatus(this.lockSwitch);
+
+        Listener listener = new Listener(getApplicationContext());
 
         lockSwitch.setOnCheckedChangeListener(listener);
 
