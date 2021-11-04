@@ -15,8 +15,10 @@ public class RestService {
         AndroidNetworking.initialize(context);
     }
 
+    String address = "http://172.20.10.4:3000";
+
     public void getStatus(Switch switcher){
-        AndroidNetworking.get("http://192.168.1.100:8080/getStatus")
+        AndroidNetworking.get(address+"/getStatus")
                 .setPriority(Priority.LOW)
                 .build()
                 .getAsString(new StringRequestListener() {
@@ -34,7 +36,7 @@ public class RestService {
     }
 
     public void changeStatus(CompoundButton switcher, String status) {
-        AndroidNetworking.get("http://192.168.1.100:8080/changeStatus/{status}")
+        AndroidNetworking.post(address+"changeStatus")
                 .addPathParameter("status", status)
                 .setPriority(Priority.LOW)
                 .build()
