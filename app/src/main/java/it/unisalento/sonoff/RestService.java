@@ -19,7 +19,7 @@ public class RestService {
         AndroidNetworking.initialize(context);
     }
 
-    String address = "http://192.168.1.100:8080";
+    String address = "http://192.168.1.67:8083";
 
     public void getStatus(Switch switcher){
         AndroidNetworking.get(address+"/getStatus")
