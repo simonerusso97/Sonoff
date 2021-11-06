@@ -19,7 +19,7 @@ public class RestService {
         AndroidNetworking.initialize(context);
     }
 
-    String address = "http://192.168.1.67:3000";
+    String address = "http://192.168.1.100:8080";
 
     public void getStatus(Switch switcher){
         AndroidNetworking.get(address+"/getStatus")
@@ -39,9 +39,8 @@ public class RestService {
                 });
     }
 
-    public void changeStatus(CompoundButton switcher, String status) {
-        AndroidNetworking.post(address+"/changeStatus")
-                .addBodyParameter("status", status)
+    public void changeStatusON(CompoundButton switcher, String status) {
+        AndroidNetworking.get(address+"/changeStatusON")
                 .setPriority(Priority.LOW)
                 .build()
                 .getAsString(new StringRequestListener() {
@@ -54,10 +53,30 @@ public class RestService {
                     @Override
                     public void onError(ANError anError) {
                         Log.e("Rest (changeStatus()):", anError.toString());
-                        switcher.setChecked(!status.equals("ON"));
+                        switcher.setChecked(false);
+                    }
+                });
+    }
+
+    public void changeStatusOFF(CompoundButton switcher, String status) {
+        AndroidNetworking.get(address+"/changeStatusOFF")
+                .setPriority(Priority.LOW)
+                .build()
+                .getAsString(new StringRequestListener() {
+
+                    @Override
+                    public void onResponse(String response) {
+                        Log.w("Rest (changeStatus()):", "stato corrente " + response);
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Log.e("Rest (changeStatus()):", anError.toString());
+                        switcher.setChecked(true);
                     }
                 });
 
 
     }
+
 }
