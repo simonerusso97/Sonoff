@@ -17,9 +17,19 @@
         android:textOn="On"
         android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/statusTextView"
+    <Button
+        android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"/>
+        android:layout_gravity="center"
+        android:text="Richiedi accesso" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="" />
+
+
 </LinearLayout>

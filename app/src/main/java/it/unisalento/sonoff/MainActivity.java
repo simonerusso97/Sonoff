@@ -3,13 +3,14 @@ package it.unisalento.sonoff;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     Switch lockSwitch;
-    TextView statusTextView;
+    Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         lockSwitch = findViewById(R.id.lockSwitch);
-        statusTextView = findViewById(R.id.statusTextView);
+        button = findViewById(R.id.button);
 
         RestService restService = new RestService(getApplicationContext());
         restService.getStatus(this.lockSwitch);
@@ -25,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         Listener listener = new Listener(getApplicationContext());
 
         lockSwitch.setOnCheckedChangeListener(listener);
+        button.setOnClickListener(listener);
 
     }
 
