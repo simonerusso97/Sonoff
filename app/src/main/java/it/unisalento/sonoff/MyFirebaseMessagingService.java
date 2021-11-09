@@ -86,6 +86,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void sendRegistrationToServer(String token) {
-        // TODO: Implement this method to send token to your app server.
+        RestService restService = new RestService(getApplicationContext());
+        restService.saveToken(token);
+
     }
 }

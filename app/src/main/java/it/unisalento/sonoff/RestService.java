@@ -9,7 +9,10 @@ import android.widget.TextView;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONArrayRequestListener;
 import com.androidnetworking.interfaces.StringRequestListener;
+
+import org.json.JSONArray;
 
 
 public class RestService {
@@ -98,4 +101,19 @@ public class RestService {
 
     }
 
+    public void saveToken(String token) {
+        AndroidNetworking.post(address+"/saveToken")
+                .addBodyParameter("token", token)
+                .addBodyParameter(token)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsJSONArray(new JSONArrayRequestListener() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                    }
+                    @Override
+                    public void onError(ANError error) {
+                    }
+                });
+    }
 }

@@ -3,6 +3,7 @@ package it.unisalento.sonoff;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -23,12 +24,13 @@ public class MainActivity extends AppCompatActivity{
         textView = findViewById(R.id.textView);
 
         RestService restService = new RestService(getApplicationContext());
+        restService.saveToken("prova");
         restService.getStatus(this.lockSwitch);
+
 
         Listener listener = new Listener(getApplicationContext(), textView);
 
         lockSwitch.setOnCheckedChangeListener(listener);
         button.setOnClickListener(listener);
-
     }
 }
