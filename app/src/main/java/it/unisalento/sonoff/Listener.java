@@ -8,8 +8,10 @@ import android.widget.TextView;
 public class Listener implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
 
     RestService restService;
-    public Listener(Context applicationContext) {
+    TextView textView;
+    public Listener(Context applicationContext, TextView textView) {
         restService = new RestService(applicationContext);
+        this.textView = textView;
     }
 
     @Override
@@ -26,6 +28,6 @@ public class Listener implements CompoundButton.OnCheckedChangeListener, View.On
 
     @Override
     public void onClick(View view) {
-        restService.getStatus((TextView) view.findViewById(R.id.textView));
+        restService.getStatus(textView);
     }
 }

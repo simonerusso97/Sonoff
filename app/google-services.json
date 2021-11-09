@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "706972859833",
+    "project_id": "sonoff-66f45",
+    "storage_bucket": "sonoff-66f45.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:706972859833:android:7714fa5eb2a0e026c60a68",
+        "android_client_info": {
+          "package_name": "it.unisalento.sonoff"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "706972859833-o0nbp178f25g18e7ibdr8cu861a969pm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnsS9p-2Jv9u8ZBqjtWLfMXDeqT50SR6A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "706972859833-o0nbp178f25g18e7ibdr8cu861a969pm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
