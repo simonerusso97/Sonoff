@@ -1,5 +1,6 @@
 package it.unisalento.sonoff;
 
+import android.app.ActivityManager;
 import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationChannel;
@@ -18,13 +19,14 @@ import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.util.List;
+
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final int REQUEST_CODE = 1;
     private static final int NOTIFICATION_ID = 6578;
 
     private static final String TAG = "MyFirebaseMsgService";
-
 
     public MyFirebaseMessagingService() {
         super();
@@ -36,7 +38,37 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         String title = remoteMessage.getData().get("title");
         String message = remoteMessage.getData().get("body");
+        
+       /* ActivityManager activityManager = (ActivityManager) getApplicationContext().getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> services = activityManager
+                .getRunningTasks(Integer.MAX_VALUE);
 
+        boolean isActivityFound = false;
+
+        if (services.get(0).topActivity.getPackageName().toString()
+                .equalsIgnoreCase(getApplicationContext().getPackageName().toString())) {
+            isActivityFound = true;
+        }
+
+        *//*if (isActivityFound) {
+            if(message.equals("ON"))
+                MainActivity.setLockSwitch(true);
+            else
+                MainActivity.setLockSwitch(false);
+        } else {
+            // write your code to build a notification.
+            // return the notification you built here
+        }       *//*
+
+
+        if(message.equals("ON")){
+            senderInterface.send(true);
+
+        }
+        else{
+            senderInterface.send(false);
+
+        }*/
         showNotification(title, message);
     }
 
